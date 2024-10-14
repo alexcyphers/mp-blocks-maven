@@ -71,7 +71,64 @@ public class HComp implements AsciiBlock {
    *   if i is outside the range of valid rows.
    */
   public String row(int i) throws Exception {
-    return "";  // STUB
+
+    String str = "";
+    int initial_width = 0;
+    int final_width = 0;
+    int height = 0;
+    //int bottom_height = 0;
+    int index;
+
+
+    for(int j=0; j<blocks.length; j++){
+      if(this.blocks[j].height() > j){
+        height = this.blocks[j].height();
+      }
+    }
+
+
+    
+    for(int j=0; j<blocks.length; j++){
+
+      if(blocks[j].height() > i){
+        if(this.align == VAlignment.TOP){
+          index = i;
+       }
+       else if(this.align == VAlignment.BOTTOM){
+          index = i - (height - blocks[j].height());
+       }
+        else{
+         index = i - ((height - blocks[j].height()) / 2);
+       }
+
+
+       if (index >= 0 && index < blocks[j].height()){
+        str += this.blocks[j].row(index);
+       } else {
+        str += " ".repeat(this.blocks[j].width());
+       }
+      }
+
+        // str += this.blocks[j].row(i);
+        // final_width += this.blocks[j].width();
+      
+
+      //initial_width += this.blocks[j].width();
+    }
+
+    return str;
+
+    // int num = initial_width - final_width;
+
+    // if(this.align == VAlignment.TOP){
+    //   return " ".repeat(num) + str;
+    // }
+    // else if(this.align == VAlignment.BOTTOM){
+    //   return " ".repeat(num) + str;
+    // }
+    
+    
+
   } // row(int)
 
   /**
@@ -80,7 +137,16 @@ public class HComp implements AsciiBlock {
    * @return the number of rows
    */
   public int height() {
-    return 0;   // STUB
+
+    int h = 0;
+
+    for(int i=0; i<blocks.length; i++){
+      if(this.blocks[i].height() > h){
+        h = this.blocks[i].height();
+      }
+    }
+
+    return h;
   } // height()
 
   /**
@@ -89,7 +155,14 @@ public class HComp implements AsciiBlock {
    * @return the number of columns
    */
   public int width() {
-    return 0;   // STUB
+    
+    int w = 0;
+
+    for(int i=0; i<blocks.length; i++){
+      w += this.blocks[i].width();
+    }
+
+    return w;
   } // width()
 
   /**
