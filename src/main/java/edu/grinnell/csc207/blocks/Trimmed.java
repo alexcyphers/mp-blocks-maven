@@ -78,7 +78,48 @@ public class Trimmed implements AsciiBlock {
    *   If the row is invalid.
    */
   public String row(int i) throws Exception {
-    throw new Exception("Not yet implemented"); // STUB
+    int newRow = 0;
+    int height = block.height();
+    int width = block.width();
+
+    if(valign == VAlignment.CENTER) {
+      if(height() - height > 0) {
+        newRow = height() - height / 2;
+      } else {
+        newRow = 0;
+      } // if/else
+    } else if (valign == VAlignment.BOTTOM) {
+      if(height() - height > 0) {
+        newRow = height() - height;
+      } else {
+        newRow = 0;
+      } // if/else
+    } // if/else
+
+    int col = 0;
+
+    if(halign == HAlignment.CENTER) {
+      if(width() - width > 0) {
+        col = (width() - width) / 2;
+      } else {
+        col = 0;
+      } // if/else
+    } else if (halign == HAlignment.RIGHT) {
+      if(width() - width > 0) {
+        col = width() - width;
+      } else {
+        col = 0;
+      } // if/else
+    } // if/else
+
+    String initialRow = block.row(newRow + 1);
+
+    if((col + width()) > width) {
+      return initialRow.substring(col, initialRow.length());
+    } else {
+      return initialRow;
+    }
+
   } // row(int)
 
   /**
@@ -87,7 +128,11 @@ public class Trimmed implements AsciiBlock {
    * @return the number of rows
    */
   public int height() {
-    return 0;   // STUB
+    if(block.height() > height) {
+      return height;
+    } else {
+      return block.height();
+    } // if/else
   } // height()
 
   /**
@@ -96,7 +141,11 @@ public class Trimmed implements AsciiBlock {
    * @return the number of columns
    */
   public int width() {
-    return 0;   // STUB
+    if(block.width() > width) {
+      return width;
+    } else {
+      return block.width();
+    } // if/else
   } // width()
 
   /**
