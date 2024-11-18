@@ -97,7 +97,7 @@ public class HComp implements AsciiBlock {
   }
 
 
-  
+
   /**
    * Determine how many rows are in the block.
    *
@@ -122,7 +122,6 @@ public class HComp implements AsciiBlock {
    * @return the number of columns
    */
   public int width() {
-    
     int w = 0;
 
     for(int i=0; i<blocks.length; i++){

@@ -72,29 +72,27 @@ public class VComp implements AsciiBlock {
    *   if i is outside the range of valid rows.
    */
   public String row(int i) throws Exception {
-    String str = "";
-    int index;
 
-    for (int j=0; j<blocks.length; j++) {
+    for (int j = 0; j < blocks.length; j++) {
+      int index = i;
+      int width = blocks[j].width();
       int height = blocks[j].height();
+      String str = blocks[j].row(index);
+      int spaces = 0;
 
-      if (this.align == VAlignment.TOP) {
-        index = i;
-      } else if (this.align == VAlignment.BOTTOM) {
-        index = i - (height() - height);
+      if (index >= height) {
+        index -= height;
       } else {
-        index = i - ((height() - height) / 2);
-      } // if/else
-
-
-       if (index >= 0 && index < blocks[j].height()){
-        str += this.blocks[j].row(index);
-       } else {
-        str += " ".repeat(this.blocks[j].width());
-       } // if/else
+        if (this.align == HAlignment.CENTER) {
+          spaces = (width() - width) / 2;
+        } else if (this.align == HAlignment.RIGHT) {
+          spaces = width() - width;
+        } // if/else
+        return " ".repeat(spaces) + str;
+      }
     }
-    return str;
-    
+
+    throw new Exception("Index out of range");
   } // row(int)
 
   /**
@@ -103,7 +101,13 @@ public class VComp implements AsciiBlock {
    * @return the number of rows
    */
   public int height() {
-    return 0;   // STUB
+    int h = 0;
+
+    for(int i=0; i<blocks.length; i++){
+      h += blocks[i].height();
+    }
+
+    return h;
   } // height()
 
   /**
@@ -111,8 +115,16 @@ public class VComp implements AsciiBlock {
    *
    * @return the number of columns
    */
-  public int width() {
-    return 0;   // STUB
+  public int width() { 
+    int w = 0;
+
+    for(int i=0; i<blocks.length; i++){
+      if(blocks[i].width() > w) {
+        w = this.blocks[i].width();
+      }
+    }
+
+    return w;
   } // width()
 
   /**
