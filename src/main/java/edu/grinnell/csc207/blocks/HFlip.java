@@ -48,7 +48,7 @@ public class HFlip implements AsciiBlock {
     int length = block.row(i).length();
     char[] reverseRow = new char[length];
 
-    for(int j = 0; i < length; j++) {
+    for(int j = 0; j < length; j++) {
       reverseRow[j] = block.row(i).charAt(length - 1 - j);
     }
 
