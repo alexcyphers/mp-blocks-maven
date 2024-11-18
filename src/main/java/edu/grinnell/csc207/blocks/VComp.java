@@ -76,18 +76,18 @@ public class VComp implements AsciiBlock {
     for (int j = 0; j < blocks.length; j++) {
 
       if (i >= blocks[j].height()) {
-        i -= blocks[j].width();
+        i -= blocks[j].height();
       } else {
         int width = blocks[j].width();
         String str = blocks[j].row(i);
         int spaces = 0;
-        
+
         if (this.align == HAlignment.CENTER) {
           spaces = (width() - width) / 2;
         } else if (this.align == HAlignment.RIGHT) {
           spaces = width() - width;
         } // if/else
-        return " ".repeat(spaces) + str;
+        return " ".repeat(spaces) + str + " ".repeat(width() - width - spaces);
       }
     }
 
