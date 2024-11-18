@@ -74,15 +74,14 @@ public class VComp implements AsciiBlock {
   public String row(int i) throws Exception {
 
     for (int j = 0; j < blocks.length; j++) {
-      int index = i;
-      int width = blocks[j].width();
-      int height = blocks[j].height();
-      String str = blocks[j].row(index);
-      int spaces = 0;
 
-      if (index >= height) {
-        index -= height;
+      if (i >= blocks[j].height()) {
+        i -= blocks[j].width();
       } else {
+        int width = blocks[j].width();
+        String str = blocks[j].row(i);
+        int spaces = 0;
+        
         if (this.align == HAlignment.CENTER) {
           spaces = (width() - width) / 2;
         } else if (this.align == HAlignment.RIGHT) {
