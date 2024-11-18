@@ -72,7 +72,29 @@ public class VComp implements AsciiBlock {
    *   if i is outside the range of valid rows.
    */
   public String row(int i) throws Exception {
-    return "";  // STUB
+    String str = "";
+    int index;
+
+    for (int j=0; j<blocks.length; j++) {
+      int height = blocks[j].height();
+
+      if (this.align == VAlignment.TOP) {
+        index = i;
+      } else if (this.align == VAlignment.BOTTOM) {
+        index = i - (height() - height);
+      } else {
+        index = i - ((height() - height) / 2);
+      } // if/else
+
+
+       if (index >= 0 && index < blocks[j].height()){
+        str += this.blocks[j].row(index);
+       } else {
+        str += " ".repeat(this.blocks[j].width());
+       } // if/else
+    }
+    return str;
+    
   } // row(int)
 
   /**

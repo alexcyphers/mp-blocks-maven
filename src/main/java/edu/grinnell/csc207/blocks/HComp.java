@@ -73,64 +73,31 @@ public class HComp implements AsciiBlock {
   public String row(int i) throws Exception {
 
     String str = "";
-    int initial_width = 0;
-    int final_width = 0;
-    int height = 0;
-    //int bottom_height = 0;
     int index;
 
+    for (int j=0; j<blocks.length; j++) {
+      int height = blocks[j].height();
 
-    for(int j=0; j<blocks.length; j++){
-      if(this.blocks[j].height() > j){
-        height = this.blocks[j].height();
-      }
-    }
-
-
-    
-    for(int j=0; j<blocks.length; j++){
-
-      if(blocks[j].height() > i){
-        if(this.align == VAlignment.TOP){
-          index = i;
-       }
-       else if(this.align == VAlignment.BOTTOM){
-          index = i - (height - blocks[j].height());
-       }
-        else{
-         index = i - ((height - blocks[j].height()) / 2);
-       }
+      if (this.align == VAlignment.TOP) {
+        index = i;
+      } else if (this.align == VAlignment.BOTTOM) {
+        index = i - (height() - height);
+      } else {
+        index = i - ((height() - height) / 2);
+      } // if/else
 
 
        if (index >= 0 && index < blocks[j].height()){
         str += this.blocks[j].row(index);
        } else {
         str += " ".repeat(this.blocks[j].width());
-       }
-      }
-
-        // str += this.blocks[j].row(i);
-        // final_width += this.blocks[j].width();
-      
-
-      //initial_width += this.blocks[j].width();
+       } // if/else
     }
-
     return str;
+  }
 
-    // int num = initial_width - final_width;
 
-    // if(this.align == VAlignment.TOP){
-    //   return " ".repeat(num) + str;
-    // }
-    // else if(this.align == VAlignment.BOTTOM){
-    //   return " ".repeat(num) + str;
-    // }
-    
-    
-
-  } // row(int)
-
+  
   /**
    * Determine how many rows are in the block.
    *
