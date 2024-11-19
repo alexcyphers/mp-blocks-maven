@@ -54,8 +54,8 @@ public class TestNewBlock {
 
 
   /**
-   * Test trimmed on an asciiblock using left horizontal alignment
-   * and top vertical alignment.
+   * Test trimmed on an asciiblock using different
+   * horizontal alignments.
    */
   @Test
   public void testTrimmedHorizontal() {
@@ -91,16 +91,15 @@ public class TestNewBlock {
         + "ij\n",
         TestUtils.toString(trimmedRight),
         "M: Correct contents of right-aligned trimmed");
-        
-  }
+  } // testTrimmedHorizontal()
 
 
 
 
 
-    /**
-   * Test trimmed on an asciiblock using left horizontal alignment
-   * and top vertical alignment.
+  /**
+   * Test trimmed on an asciiblock using different vertical
+   * alignments.
    */
   @Test
   public void testTrimmedVertical() {
@@ -126,79 +125,150 @@ public class TestNewBlock {
         "M: Correct contents of top-aligned trimmed");
     assertEquals(
       "" 
-        + "ab\n"
-        + "fg\n",
+        + "fg\n"
+        + "kl\n",
         TestUtils.toString(trimmedCenter),
         "M: Correct contents of center-aligned trimmed");
     assertEquals(
       "" 
-        + "ab\n"
-        + "fg\n",
+        + "pq\n"
+        + "uv\n",
         TestUtils.toString(trimmedBottom),
         "M: Correct contents of bottom-aligned trimmed");
-        
-  }
+  } // testTrimmedVertical()
 
 
-
-  /**
-   * Test trimmed on an asciiblock using right horizontal alignment
-   * and top vertical alignment.
-   */
-  @Test
-  public void testTrimmedRightTop() {
-    AsciiBlock trimmed = new Trimmed(alpha, HAlignment.RIGHT, VAlignment.TOP,
-                                     2, 2);
-    assertEquals(2, trimmed.width(), "Width of 2");
-    assertEquals(2, trimmed.height(), "Height of 2");
-    assertEquals(
-      "" 
-        + "de\n"
-        + "ij\n",
-        TestUtils.toString(trimmed),
-        "M: Correct contents of left-aligned top-aligned trimmed");
-  }
-
-
-
-    /**
-   * Test trimmed on an asciiblock using right horizontal alignment
-   * and top vertical alignment.
+   /**
+   * Test trimmed on an asciiblock using higher widths than heights.
    */
   @Test
   public void testTrimmedHigherWidth() {
-    AsciiBlock trimmed = new Trimmed(alpha, HAlignment.CENTER, VAlignment.TOP,
+    AsciiBlock trimmedLeft = new Trimmed(alpha, HAlignment.LEFT, VAlignment.TOP,
                                      3, 2);
-    assertEquals(3, trimmed.width(), "Width of 2");
-    assertEquals(2, trimmed.height(), "Height of 2");
+    AsciiBlock trimmedFullWidth = new Trimmed(alpha, HAlignment.CENTER, VAlignment.BOTTOM,
+                                     5, 2);
+    AsciiBlock trimmedFlat = new Trimmed(alpha, HAlignment.CENTER, VAlignment.TOP,
+                                     3, 1);
+    
+
+    assertEquals(3, trimmedLeft.width(), "Width of 3");
+    assertEquals(5, trimmedFullWidth.width(), "Width of 5");
+    assertEquals(3, trimmedFlat.width(), "Width of 3");
+    assertEquals(2, trimmedLeft.height(), "Height of 2");
+    assertEquals(2, trimmedFullWidth.height(), "Height of 2");
+    assertEquals(1, trimmedFlat.height(), "Height of 1");
+
     assertEquals(
       "" 
-        + "bcd\n"
-        + "ghi\n",
-        TestUtils.toString(trimmed),
-        "M: Correct contents of left-aligned top-aligned trimmed");
-  }
+        + "abc\n"
+        + "fgh\n",
+        TestUtils.toString(trimmedLeft),
+        "M: Correct contents of left-aligned trimmed");
+    assertEquals(
+      "" 
+        + "pqrst\n"
+        + "uvwxy\n",
+        TestUtils.toString(trimmedFullWidth),
+        "M: Correct contents of full width trimmed");
+    assertEquals(
+      "" 
+        + "bcd\n",
+        TestUtils.toString(trimmedFlat),
+        "M: Correct contents of flat trimmed");
+  } // testTrimmedHigherWidth()
 
 
 
    /**
-   * Test trimmed on an asciiblock using right horizontal alignment
-   * and top vertical alignment.
+   * Test trimmed on an asciiblock using higher heights than
+   * widths.
    */
   @Test
-  public void testTrimmedRightAlignment() {
-    AsciiBlock trimmed = new Trimmed(alpha, HAlignment.CENTER, VAlignment.TOP,
-                                     2, 2);
-    assertEquals(2, trimmed.width(), "Width of 2");
-    assertEquals(2, trimmed.height(), "Height of 2");
+  public void testTrimmedHigherHeight() {
+    AsciiBlock trimmedFullHeight = new Trimmed(alpha, HAlignment.LEFT, VAlignment.TOP,
+                                     2, 5);
+    AsciiBlock trimmedBottom = new Trimmed(alpha, HAlignment.CENTER, VAlignment.BOTTOM,
+                                     2, 3);
+    AsciiBlock trimmedThin = new Trimmed(alpha, HAlignment.CENTER, VAlignment.TOP,
+                                     1, 4);
+    
+
+    assertEquals(2, trimmedFullHeight.width(), "Width of 2");
+    assertEquals(2, trimmedBottom.width(), "Width of 2");
+    assertEquals(1, trimmedThin.width(), "Width of 1");
+    assertEquals(5, trimmedFullHeight.height(), "Height of 5");
+    assertEquals(3, trimmedBottom.height(), "Height of 3");
+    assertEquals(4, trimmedThin.height(), "Height of 4");
+
     assertEquals(
       "" 
-        + "bcd\n"
-        + "ghi\n",
-        TestUtils.toString(trimmed),
-        "M: Correct contents of left-aligned top-aligned trimmed");
-  }
+        + "ab\n"
+        + "fg\n"
+        + "kl\n"
+        + "pq\n"
+        + "uv\n",
+        TestUtils.toString(trimmedFullHeight),
+        "M: Correct contents of full height trimmed");
+    assertEquals(
+      "" 
+        + "lm\n"
+        + "qr\n"
+        + "vw\n",
+        TestUtils.toString(trimmedBottom),
+        "M: Correct contents of bottom-aligned trimmed");
+    assertEquals(
+      "" 
+        + "c\n"
+        + "h\n"
+        + "m\n"
+        + "r\n",
+        TestUtils.toString(trimmedThin),
+        "M: Correct contents of thin trimmed");
+  } // testTrimmedHigherHeight()
 
   
 
+  /**
+   * Test trimmed on an asciiblock without trimming any
+   * part of the ascii block.
+   */
+  @Test
+  public void testTrimmedFullBlock() {
+    AsciiBlock trimmedFullBlock = new Trimmed(alpha, HAlignment.LEFT, VAlignment.TOP,
+                                     5, 5);
+    
+
+    assertEquals(5, trimmedFullBlock.width(), "Width of 5");
+    assertEquals(5, trimmedFullBlock.height(), "Height of 5");
+
+    assertEquals(
+      "" 
+        + "abcde\n"
+        + "fghij\n"
+        + "klmno\n"
+        + "pqrst\n"
+        + "uvwxy\n",
+        TestUtils.toString(trimmedFullBlock),
+        "M: Correct contents of full block trimmed");
+  } // testTrimmedFullBlock()
+
+
+
+    /**
+   * Test trimmed on an asciiblock while trimming the entire
+   * ascii block.
+   */
+  @Test
+  public void testTrimmedEmptyBlock() {
+    AsciiBlock trimmedEmpty = new Trimmed(alpha, HAlignment.LEFT, VAlignment.TOP,
+                                     0, 0);
+    
+
+    assertEquals(0, trimmedEmpty.width(), "Width of 0");
+    assertEquals(0, trimmedEmpty.height(), "Height of 0");
+
+    assertEquals("",
+        TestUtils.toString(trimmedEmpty),
+        "M: Correct contents of empty block trimmed");
+  } // testTrimmedEmptyBlock()
 } // class TestNewBlock

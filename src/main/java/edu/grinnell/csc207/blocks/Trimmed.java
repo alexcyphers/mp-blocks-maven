@@ -79,35 +79,40 @@ public class Trimmed implements AsciiBlock {
    */
   public String row(int i) throws Exception {
     int newRow = 0;
-    int height = block.height();
-    int width = block.width();
+    int blockHeight = block.height();
+    int blockWidth = block.width();
 
     if(valign == VAlignment.CENTER) {
-      if(height() - height > 0) {
-        newRow = (height - height()) / 2;
+      if(blockHeight - height() > 0) {
+        newRow = (blockHeight - height()) / 2;
       } else {
         newRow = 0;
       } // if/else
     } else if (valign == VAlignment.BOTTOM) {
-      if(height() - height > 0) {
-        newRow = height - height();
+      if(blockHeight - height() > 0) {
+        newRow = blockHeight - height();
       } else {
         newRow = 0;
       } // if/else
     } // if/else
     
     newRow = newRow + i;
+
+    if(newRow >= blockHeight) {
+      throw new Exception("Row index out of bounds");
+    }
+
     int col = 0;
 
     if(halign == HAlignment.CENTER) {
-      if(width - width() > 0) {
-        col = (width - width()) / 2;
+      if(blockWidth - width() > 0) {
+        col = (blockWidth - width()) / 2;
       } else {
         col = 0;
       } // if/else
     } else if (halign == HAlignment.RIGHT) {
-      if(width - width() > 0) {
-        col = width - width();
+      if(blockWidth - width() > 0) {
+        col = blockWidth - width();
       } else {
         col = 0;
       } // if/else
