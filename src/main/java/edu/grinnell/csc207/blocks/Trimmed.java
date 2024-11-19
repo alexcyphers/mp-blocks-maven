@@ -84,40 +84,41 @@ public class Trimmed implements AsciiBlock {
 
     if(valign == VAlignment.CENTER) {
       if(height() - height > 0) {
-        newRow = height() - height / 2;
+        newRow = (height - height()) / 2;
       } else {
         newRow = 0;
       } // if/else
     } else if (valign == VAlignment.BOTTOM) {
       if(height() - height > 0) {
-        newRow = height() - height;
+        newRow = height - height();
       } else {
         newRow = 0;
       } // if/else
     } // if/else
-
+    
+    newRow = newRow + i;
     int col = 0;
 
     if(halign == HAlignment.CENTER) {
-      if(width() - width > 0) {
-        col = (width() - width) / 2;
+      if(width - width() > 0) {
+        col = (width - width()) / 2;
       } else {
         col = 0;
       } // if/else
     } else if (halign == HAlignment.RIGHT) {
-      if(width() - width > 0) {
-        col = width() - width;
+      if(width - width() > 0) {
+        col = width - width();
       } else {
         col = 0;
       } // if/else
     } // if/else
+    
+    String initialRow = block.row(newRow);
 
-    String initialRow = block.row(newRow + 1);
-
-    if((col + width()) > width) {
+    if((col + width()) > initialRow.length()) {
       return initialRow.substring(col, initialRow.length());
     } else {
-      return initialRow;
+      return initialRow.substring(col, col + width());
     }
 
   } // row(int)

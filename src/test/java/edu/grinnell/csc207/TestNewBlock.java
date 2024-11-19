@@ -41,42 +41,34 @@ public class TestNewBlock {
   public static void setup() throws Exception {
     try {
       // Globals for HComp tests
-      alpha = new VComp(HAlignment.LEFT, new AsciiBlock{"abcde"}) {
-        
-      };
-      
-      
-      
-      
-      new Line("abcde"),
-                         new Line("fghij"),
-      new Line("klmno"),
-      new Line("pqrst"),
-      new Line("uvwxy"));
+      AsciiBlock[] block = new AsciiBlock[]{new Line("abcde"),
+                                          new Line("fghij"),
+                                          new Line("klmno"),
+                                          new Line("pqrst"),
+                                          new Line("uvwxy")};
+      alpha = new VComp(HAlignment.LEFT, block);
     } catch (Exception e) {
       // Do nothing; we shouldn't get exceptions.
     } // try/catch
-
+  }
 
 
   /**
    * Do we successfully build the empty block?
    */
   @Test
-  public void testTrimmedEmpty() {
+  public void testTrimmedLeftTop() {
     //AsciiBlock block = new HComp(HAlignment.LEFT, );
-    AsciiBlock[] block = new AsciiBlock[]{new Line("abcde"),
-                                          new Line("fghij"),
-                                          new Line("klmno"),
-                                          new Line("pqrst"),
-                                          new Line("uvwxy")};
-
-    
-    AsciiBlock trimmed = new Trimmed(block, HAlignment.LEFT, 
-                                     VAlignment.TOP, 2,
-                                     2);
-
-    
+    AsciiBlock trimmed = new Trimmed(alpha, HAlignment.LEFT, VAlignment.TOP,
+                                     2, 2);
+    assertEquals(2, trimmed.width(), "Width of 2");
+    assertEquals(2, trimmed.height(), "Height of 2");
+    assertEquals(
+      "" 
+        + "ab\n"
+        + "fg\n",
+        TestUtils.toString(trimmed),
+        "M: Correct contents of left-aligned top-aligned trimmed");
   }
 
 
