@@ -48,9 +48,9 @@ public class HFlip implements AsciiBlock {
     int length = block.row(i).length();
     char[] reverseRow = new char[length];
 
-    for(int j = 0; j < length; j++) {
+    for (int j = 0; j < length; j++) {
       reverseRow[j] = block.row(i).charAt(length - 1 - j);
-    }
+    } // for-loop
 
     return new String(reverseRow);
   } // row(int)
@@ -84,7 +84,7 @@ public class HFlip implements AsciiBlock {
    */
   public boolean eqv(AsciiBlock other) {
     return ((other instanceof HFlip) && (this.eqv((HFlip) other)));
-  }
+  } // eqv(AsciiBlock)
 
 
     /**

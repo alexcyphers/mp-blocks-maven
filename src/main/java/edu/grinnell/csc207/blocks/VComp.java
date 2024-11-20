@@ -88,9 +88,8 @@ public class VComp implements AsciiBlock {
           spaces = width() - width;
         } // if/else
         return " ".repeat(spaces) + str + " ".repeat(width() - width - spaces);
-      }
-    }
-
+      } // if/else
+    } // for-loop
     throw new Exception("Index out of range");
   } // row(int)
 
@@ -102,9 +101,9 @@ public class VComp implements AsciiBlock {
   public int height() {
     int h = 0;
 
-    for(int i=0; i<blocks.length; i++){
+    for (int i = 0; i < blocks.length; i++) {
       h += blocks[i].height();
-    }
+    } // for-loop
 
     return h;
   } // height()
@@ -114,14 +113,14 @@ public class VComp implements AsciiBlock {
    *
    * @return the number of columns
    */
-  public int width() { 
+  public int width() {
     int w = 0;
 
-    for(int i=0; i<blocks.length; i++){
-      if(blocks[i].width() > w) {
+    for (int i = 0; i < blocks.length; i++) {
+      if (blocks[i].width() > w) {
         w = this.blocks[i].width();
-      }
-    }
+      } // if
+    } // for-loop
 
     return w;
   } // width()
@@ -154,9 +153,9 @@ public class VComp implements AsciiBlock {
     if ((this.align != other.align) || (this.blocks.length != other.blocks.length)) {
       return false;
     } // if
-    
-    for(int i = 0; i < this.blocks.length; i++) {
-      if(!this.blocks[i].eqv(other.blocks[i])) {
+
+    for (int i = 0; i < this.blocks.length; i++) {
+      if (!this.blocks[i].eqv(other.blocks[i])) {
         return false;
       } // if
     } // for-loop

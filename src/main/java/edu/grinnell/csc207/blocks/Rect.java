@@ -53,6 +53,7 @@ public class Rect implements AsciiBlock {
   // | AsciiBlock methods |
   // +--------------------+
 
+
   /**
    * Get one row from the block.
    *

@@ -82,50 +82,49 @@ public class Trimmed implements AsciiBlock {
     int blockHeight = block.height();
     int blockWidth = block.width();
 
-    if(valign == VAlignment.CENTER) {
-      if(blockHeight - height() > 0) {
+    if (valign == VAlignment.CENTER) {
+      if (blockHeight - height() > 0) {
         newRow = (blockHeight - height()) / 2;
       } else {
         newRow = 0;
       } // if/else
     } else if (valign == VAlignment.BOTTOM) {
-      if(blockHeight - height() > 0) {
+      if (blockHeight - height() > 0) {
         newRow = blockHeight - height();
       } else {
         newRow = 0;
       } // if/else
     } // if/else
-    
+
     newRow = newRow + i;
 
-    if(newRow >= blockHeight) {
+    if (newRow >= blockHeight) {
       throw new Exception("Row index out of bounds");
-    }
+    } // if
 
     int col = 0;
 
-    if(halign == HAlignment.CENTER) {
-      if(blockWidth - width() > 0) {
+    if (halign == HAlignment.CENTER) {
+      if (blockWidth - width() > 0) {
         col = (blockWidth - width()) / 2;
       } else {
         col = 0;
       } // if/else
     } else if (halign == HAlignment.RIGHT) {
-      if(blockWidth - width() > 0) {
+      if (blockWidth - width() > 0) {
         col = blockWidth - width();
       } else {
         col = 0;
       } // if/else
     } // if/else
-    
+
     String initialRow = block.row(newRow);
 
-    if((col + width()) > initialRow.length()) {
+    if ((col + width()) > initialRow.length()) {
       return initialRow.substring(col, initialRow.length());
     } else {
       return initialRow.substring(col, col + width());
-    }
-
+    } // if/else
   } // row(int)
 
   /**
@@ -134,7 +133,7 @@ public class Trimmed implements AsciiBlock {
    * @return the number of rows
    */
   public int height() {
-    if(block.height() > height) {
+    if (block.height() > height) {
       return height;
     } else {
       return block.height();
@@ -147,7 +146,7 @@ public class Trimmed implements AsciiBlock {
    * @return the number of columns
    */
   public int width() {
-    if(block.width() > width) {
+    if (block.width() > width) {
       return width;
     } else {
       return block.width();
@@ -179,7 +178,7 @@ public class Trimmed implements AsciiBlock {
    *    false otherwise.
    */
   public boolean eqv(Trimmed other) {
-    if(this.halign != other.halign) {
+    if (this.halign != other.halign) {
       return false;
     } else if (this.valign != other.valign) {
       return false;
@@ -187,7 +186,7 @@ public class Trimmed implements AsciiBlock {
       return false;
     } else if (this.height != other.height) {
       return false;
-    }
+    } // if/else
 
     return this.block.eqv(other.block);
   } // eqv(Trimmed)

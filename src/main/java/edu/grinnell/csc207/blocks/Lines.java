@@ -128,9 +128,9 @@ public class Lines implements AsciiBlock {
     if ((this.width != other.width)) {
       return false;
     } // if
-    
-    for(int i = 0; i < this.lines.length; i++) {
-      if(!this.lines[i].equals(other.lines[i])) {
+
+    for (int i = 0; i < this.lines.length; i++) {
+      if (!this.lines[i].equals(other.lines[i])) {
         return false;
       } // if
     } // for-loop

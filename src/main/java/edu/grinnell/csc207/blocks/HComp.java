@@ -75,7 +75,7 @@ public class HComp implements AsciiBlock {
     String str = "";
     int index;
 
-    for (int j=0; j<blocks.length; j++) {
+    for (int j = 0; j < blocks.length; j++) {
       int height = blocks[j].height();
 
       if (this.align == VAlignment.TOP) {
@@ -87,14 +87,14 @@ public class HComp implements AsciiBlock {
       } // if/else
 
 
-       if (index >= 0 && index < blocks[j].height()){
+      if (index >= 0 && index < blocks[j].height()) {
         str += this.blocks[j].row(index);
-       } else {
+      } else {
         str += " ".repeat(this.blocks[j].width());
-       } // if/else
-    }
+      } // if/else
+    } // for-loop
     return str;
-  }
+  } // row(int)
 
 
 
@@ -107,11 +107,11 @@ public class HComp implements AsciiBlock {
 
     int h = 0;
 
-    for(int i=0; i<blocks.length; i++){
-      if(this.blocks[i].height() > h){
+    for (int i = 0; i < blocks.length; i++) {
+      if (this.blocks[i].height() > h) {
         h = this.blocks[i].height();
-      }
-    }
+      } // if-statement
+    } // for-loop
 
     return h;
   } // height()
@@ -124,9 +124,9 @@ public class HComp implements AsciiBlock {
   public int width() {
     int w = 0;
 
-    for(int i=0; i<blocks.length; i++){
+    for (int i = 0; i < blocks.length; i++) {
       w += this.blocks[i].width();
-    }
+    } // for-loop
 
     return w;
   } // width()
@@ -158,9 +158,9 @@ public class HComp implements AsciiBlock {
     if ((this.align != other.align) || (this.blocks.length != other.blocks.length)) {
       return false;
     } // if
-    
-    for(int i = 0; i < this.blocks.length; i++) {
-      if(!this.blocks[i].eqv(other.blocks[i])) {
+
+    for (int i = 0; i < this.blocks.length; i++) {
+      if (!this.blocks[i].eqv(other.blocks[i])) {
         return false;
       } // if
     } // for-loop
