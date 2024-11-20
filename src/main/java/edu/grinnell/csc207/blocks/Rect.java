@@ -98,21 +98,23 @@ public class Rect implements AsciiBlock {
    *    false otherwise.
    */
   public boolean eqv(AsciiBlock other) {
-    if(other instanceof Rect && (this.height() == other.height())) {
-      for(int i = 0; i < this.height(); i++) {
-        try {
-          if(!(this.row(i).equals(other.row(i)))) {
-            return false;
-          } // if
-        } catch (Exception e) {
-          System.err.println("Index out of range " + i);
-        } // try-catch
-      } // for-loop
-      return true;
-    } // if
-    return false;
+    return ((other instanceof Rect) && (this.eqv((Rect) other)));
   } // eqv(AsciiBlock)
 
+
+
+    /**
+   * Determine if another rect is structurally equivalent to this rect.
+   *
+   * @param other
+   *   The rect to compare to this rect.
+   *
+   * @return true if the two blocks are structurally equivalent and
+   *    false otherwise.
+   */
+  public boolean eqv(Rect other) {
+    return (this.height == other.height) && this.row.equals(other.row);
+  } // eqv(Rect)
   // +---------------+-----------------------------------------------
   // | Other methods |
   // +---------------+

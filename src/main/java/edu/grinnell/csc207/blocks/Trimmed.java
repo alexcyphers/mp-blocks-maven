@@ -164,6 +164,31 @@ public class Trimmed implements AsciiBlock {
    *    false otherwise.
    */
   public boolean eqv(AsciiBlock other) {
-    return false;       // STUB
+    return ((other instanceof Trimmed) && (this.eqv((Trimmed) other)));
   } // eqv(AsciiBlock)
+
+
+
+  /**
+   * Determine if another trimmed is structurally equivalent to this trimmed.
+   *
+   * @param other
+   *   The rect to compare to this trimmed.
+   *
+   * @return true if the two blocks are structurally equivalent and
+   *    false otherwise.
+   */
+  public boolean eqv(Trimmed other) {
+    if(this.halign != other.halign) {
+      return false;
+    } else if (this.valign != other.valign) {
+      return false;
+    } else if (this.width != other.width) {
+      return false;
+    } else if (this.height != other.height) {
+      return false;
+    }
+
+    return this.block.eqv(other.block);
+  } // eqv(Trimmed)
 } // class Trimmed

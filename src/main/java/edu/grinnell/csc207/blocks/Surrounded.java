@@ -97,18 +97,21 @@ public class Surrounded implements AsciiBlock {
    *    false otherwise.
    */
   public boolean eqv(AsciiBlock other) {
-    if(other instanceof Surrounded && (this.height() == other.height())) {
-      for(int i = 0; i < this.height(); i++) {
-        try {
-          if(!(this.row(i).equals(other.row(i)))) {
-            return false;
-          } // if
-        } catch (Exception e) {
-          System.err.println("Index out of range " + i);
-        } // try-catch
-      } // for-loop
-      return true;
-    } // if
-    return false;
+    return ((other instanceof Surrounded) && (this.eqv((Surrounded) other)));
   } // eqv(AsciiBlock)
+
+
+
+   /**
+   * Determine if another surrounded is structurally equivalent to this surrounded.
+   *
+   * @param other
+   *   The rect to compare to this surrounded.
+   *
+   * @return true if the two blocks are structurally equivalent and
+   *    false otherwise.
+   */
+  public boolean eqv(Surrounded other) {
+    return (this.surroundChar.equals(other.surroundChar)) && this.contents.eqv(other.contents);
+  } // eqv(Surrounded)
 } // class Surrounded

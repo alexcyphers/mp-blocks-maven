@@ -83,18 +83,20 @@ public class HFlip implements AsciiBlock {
    *    false otherwise.
    */
   public boolean eqv(AsciiBlock other) {
-    if(other instanceof HFlip && (this.height() == other.height())) {
-      for(int i = 0; i < this.height(); i++) {
-        try {
-          if(!(this.row(i).equals(other.row(i)))) {
-            return false;
-          } // if
-        } catch (Exception e) {
-          System.err.println("Index out of range " + i);
-        } // try-catch
-      } // for-loop
-      return true;
-    } // if
-    return false;
-  } // eqv(AsciiBlock)
+    return ((other instanceof HFlip) && (this.eqv((HFlip) other)));
+  }
+
+
+    /**
+   * Determine if another HFlip is structurally equivalent to this HFlip.
+   *
+   * @param other
+   *   The HFlip to compare to this HFlip.
+   *
+   * @return true if the two blocks are structurally equivalent and
+   *    false otherwise.
+   */
+  public boolean eqv(HFlip other) {
+    return this.block.eqv(other.block);
+  } // eqv(HFlip)
 } // class HFlip

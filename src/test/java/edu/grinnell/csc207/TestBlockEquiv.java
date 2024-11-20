@@ -79,7 +79,7 @@ public class TestBlockEquiv {
 
   /** Rects, B side. */
   static AsciiBlock[] exesRectsB =
-    new AsciiBlock[] {exesRect0b };
+    new AsciiBlock[] {exesRect0b};
 
   // +----------------+----------------------------------------------
   // | Exes with Grid |

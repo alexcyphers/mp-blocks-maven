@@ -141,18 +141,29 @@ public class HComp implements AsciiBlock {
    *    false otherwise.
    */
   public boolean eqv(AsciiBlock other) {
-    if(other instanceof HFlip && (this.height() == other.height())) {
-      for(int i = 0; i < this.height(); i++) {
-        try {
-          if(!(this.row(i).equals(other.row(i)))) {
-            return false;
-          } // if
-        } catch (Exception e) {
-          System.err.println("Index out of range " + i);
-        } // try-catch
-      } // for-loop
-      return true;
-    } // if
-    return false;
+    return ((other instanceof HComp) && (this.eqv((HComp) other)));
   } // eqv(AsciiBlock)
+
+
+    /**
+   * Determine if another Hcomp is structurally equivalent to this HComp.
+   *
+   * @param other
+   *   The HComp to compare to this HComp.
+   *
+   * @return true if the two blocks are structurally equivalent and
+   *    false otherwise.
+   */
+  public boolean eqv(HComp other) {
+    if ((this.align != other.align) || (this.blocks.length != other.blocks.length)) {
+      return false;
+    } // if
+    
+    for(int i = 0; i < this.blocks.length; i++) {
+      if(!this.blocks[i].eqv(other.blocks[i])) {
+        return false;
+      } // if
+    } // for-loop
+    return true;
+  } // eqv(HComp)
 } // class HComp

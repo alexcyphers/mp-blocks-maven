@@ -111,6 +111,29 @@ public class Lines implements AsciiBlock {
    *    false otherwise.
    */
   public boolean eqv(AsciiBlock other) {
-    return false;       // STUB
+    return ((other instanceof Lines) && (this.eqv((Lines) other)));
   } // eqv(AsciiBlock)
+
+
+   /**
+   * Determine if another Lines is structurally equivalent to this Lines.
+   *
+   * @param other
+   *   The Lines to compare to this Lines.
+   *
+   * @return true if the two blocks are structurally equivalent and
+   *    false otherwise.
+   */
+  public boolean eqv(Lines other) {
+    if ((this.width != other.width)) {
+      return false;
+    } // if
+    
+    for(int i = 0; i < this.lines.length; i++) {
+      if(!this.lines[i].equals(other.lines[i])) {
+        return false;
+      } // if
+    } // for-loop
+    return true;
+  } // eqv(Lines)
 } // class Lines
