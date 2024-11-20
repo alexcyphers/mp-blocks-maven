@@ -141,6 +141,18 @@ public class HComp implements AsciiBlock {
    *    false otherwise.
    */
   public boolean eqv(AsciiBlock other) {
-    return false;       // STUB
+    if(other instanceof HFlip && (this.height() == other.height())) {
+      for(int i = 0; i < this.height(); i++) {
+        try {
+          if(!(this.row(i).equals(other.row(i)))) {
+            return false;
+          } // if
+        } catch (Exception e) {
+          System.err.println("Index out of range " + i);
+        } // try-catch
+      } // for-loop
+      return true;
+    } // if
+    return false;
   } // eqv(AsciiBlock)
 } // class HComp
